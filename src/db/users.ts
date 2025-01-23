@@ -48,6 +48,11 @@ const UserSchema = new mongoose.Schema({
         trim: true,
     },
     logo: { type: String },
+    fcm_token: {
+        type: String,
+        trim: true,
+        default: null, 
+    },
 },{ timestamps: true})
 
 export const UserModel = mongoose.model('User', UserSchema);

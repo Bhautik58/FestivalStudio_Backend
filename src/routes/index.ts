@@ -1,5 +1,7 @@
 import validateUser from '../middlewares/validateUsers.ts';
-import userController from '../controllers/UserController.ts';
+import UserController from '../controllers/UserController.ts';
+import validateFestival from '../middlewares/ validateFestivals.ts';
+import FestivalController from '../controllers/FestivalController.ts';
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
@@ -21,6 +23,12 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage })
 
-router.post('/user', upload.single('logo'), validateUser, userController.createUser);
+router.post('/user', upload.single('logo'), validateUser, UserController.createUser);
 
-export default router;
+
+router.post('/festival', validateFestival, FestivalController.createFestival);
+router.get('/festivals', FestivalController.getAllFestivals);
+router.patch('/festival/:id', FestivalController.updateFestival);
+router.delete('/festival/:id', FestivalController.deleteFestival);
+
+export default router;  
